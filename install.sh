@@ -6,26 +6,26 @@
 yum install -y java-1.8.0-openjdk-devel
 
 #Set java home
-echo "JAVA_HOME='/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.181-3.b13.el7_5.x86_64/'" >> ~/.bashrc
-echo "export JAVA_HOME" >> ~/.bashrc
-echo 'PATH="$JAVA_HOME/bin:$PATH"' >>~/.bashrc
-echo 'export PATH' >>~/.bashrc
+echo "JAVA_HOME='/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.181-3.b13.el7_5.x86_64/'" >> /etc/profile
+echo "export JAVA_HOME" >> /etc/profile
+echo 'PATH="$JAVA_HOME/bin:$PATH"' >>/etc/profile
+echo 'export PATH' >>/etc/profile
 
 #Use new env variable
-source ~/.bashrc
+source /etc/profile
 
 #Install maven
-cd opt
+cd /opt
 wget http://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
 tar -xvzf apache-maven-3.5.4-bin.tar.gz
 
 #Set maven home and paths
-echo 'M2_HOME="/opt/apache-maven-3.5.4"' >>~/.bashrc
-echo 'export M2=$M2_HOME/bin' >>~/.bashrc
-echo 'export PATH=$M2:$PATH' >>~/.bashrc
+echo 'M2_HOME="/opt/apache-maven-3.5.4"' >>/etc/profile
+echo 'export M2=$M2_HOME/bin' >>/etc/profile
+echo 'export PATH=$M2:$PATH' >>/etc/profile
 
 #Use environment
-source ~/.bashrc
+source /etc/profile
 
 #Install git
 yum install -y git
@@ -42,11 +42,7 @@ service jenkins start
 sudo chkconfig jenkins on
 
 #Enable firewall to allow jenkins
-firewall-cmd --permanent --new-service=jenkins
-firewall-cmd --permanent --service=jenkins --set-short="Jenkins Service Ports"
-firewall-cmd --permanent --service=jenkins --set-description="Jenkins service firewalld port exceptions"
-firewall-cmd --permanent --service=jenkins --add-port=8080/tcp
-firewall-cmd --zone=public --add-service=http --permanent
-firewall-cmd --reload
+service firewalld stop
+service firewalld disable
 
 
