@@ -30,14 +30,21 @@ sh /etc/profile.d/vars.sh
 #Install tomcat
 yum install -y tomcat
 
+#add parameters for tomcat
+echo 'JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"'>>/usr/share/tomcat/conf/tomcat.conf
+
+yum install -y tomcat-webapps tomcat-admin-webapps
+
+
 
 #Make sure that tomcat user has rights to use tomcat folders...
 chown -R tomcat:tomcat /var/lib/tomcat
 
 #Start tomcat service
-service tomcat start
+systemctl start tomcat
 
-
+#Enable tomcat on every boot
+systemctl enable tomcat
 
 
 
