@@ -1,0 +1,6 @@
+Login-AzureRmAccount
+
+New-AzureRmResourceGroup -Name jenkinsmaster -Location 'West Europe';
+
+New-AzureRmResourceGroupDeployment -Name jenkinsmasterdeployment -ResourceGroupName jenkinsmaster `
+-TemplateUri  https://raw.githubusercontent.com/NikolaLal/linux_jenkins/master/azuredeploy.json

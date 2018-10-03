@@ -1,0 +1,1 @@
+/var/lib/waagent/Microsoft.OSTCExtensions.CustomScriptForLinux-1.5.3/download/0

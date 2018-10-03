@@ -1,0 +1,28 @@
+{
+			"type":"Microsoft.Compute/virtualMachines/extensions",
+			"copy":{
+				"name":"virtualMachinesExtensionsCopy"
+				
+			},
+			"name":"[concat(parameters('virtualMachines_name_prefix'), '/', 'CustomScriptForLinux')]",
+			"apiVersion":"2015-06-15",
+			"location":"[resourceGroup().location]",
+			"dependsOn":[
+				"[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachines_name_prefix'))]"
+			],
+			"properties":{
+				"publisher":"Microsoft.OSTCExtensions",
+				"type":"CustomScriptForLinux",
+				"typeHandlerVersion":"1.5",
+				"autoUpgradeMinorVersion":true,
+				"settings":{
+					"fileUris":[
+						"[variables('https://raw.githubusercontent.com/milenkom81/rhelinstallscript/master/install.sh')]"
+					],
+					"commandToExecute":"sh install.sh"
+				},
+				"protectedSettings":{
+
+				}
+			}
+		},
