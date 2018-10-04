@@ -55,5 +55,3 @@ systemctl enable tomcat
 #Enable firewall to allow tomcat
 service firewalld stop
 service firewalld disable
-
-
